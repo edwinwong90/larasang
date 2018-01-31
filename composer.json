@@ -1,0 +1,15 @@
+{
+    "name": "edwinwong90/larasang",
+    "description": "The fastest way to build API development",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Edwin Wong",
+            "email": "edwindeveloper90@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=7.0.0"
+    }
+}

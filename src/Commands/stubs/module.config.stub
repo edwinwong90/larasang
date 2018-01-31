@@ -1,0 +1,115 @@
+<?php
+
+return [
+
+    /*
+    |--------------------------------------------------------------------------
+    | Controller Name
+    |--------------------------------------------------------------------------
+    |
+    | This value is the name of the controller. This value use to tell Larasang
+    | to auto load this controller configuration.
+    |
+    */
+
+    'controller' => DummyControllerClass,
+
+    /*
+    |--------------------------------------------------------------------------
+    | Model Name
+    |--------------------------------------------------------------------------
+    |
+    | This value is the name of the model. This value use to tell Larasang
+    | to auto load the model in this controller.
+    |
+    */
+
+    'model' => DummyModelClass,
+
+    /*
+    |--------------------------------------------------------------------------
+    | Pagination
+    |--------------------------------------------------------------------------
+    |
+    | This value is the configuration of pagination for resource listing. This
+    | is recommended to set a limit for big data listing.
+    |
+    */
+
+    'pagination' => [
+        'limit' => 15
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Route Configuration
+    |--------------------------------------------------------------------------
+    |
+    | This value is the Laravel resource route configuration. Read more, 
+    | https://laravel.com/docs/5.5/controllers#restful-partial-resource-routes
+    |
+    */
+    
+    'route_resource_config' => [],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Request Validation
+    |--------------------------------------------------------------------------
+    |
+    | This is the method of controller in Larasang. The value is the Request  
+    | class for Larasang controller methods.
+    |
+    */
+
+    'request' => [
+        'store'     => '',
+        'update'    => '',
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Event Listeners
+    |--------------------------------------------------------------------------
+    |
+    | This is the list of event pre-defined in Larasang. The value is the event 
+    | listener class for each event.
+    |
+    */
+
+    'listener' => [
+        'IndexBefore'   => '',
+        'IndexAfter'    => '',
+        'StoreBefore'   => '',
+        'StoreAfter'    => '',
+        'UpdateBefore'  => '',
+        'UpdateAfter'   => '',
+        'ShowBefore'    => '',
+        'ShowAfter'     => '',
+        'DeleteBefore'  => '',
+        'DeleteAfter'   => '',
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Prefix
+    |--------------------------------------------------------------------------
+    |
+    | This is the value of route prefix.
+    |
+    */
+
+    'prefix' => '',
+
+    /*
+    |--------------------------------------------------------------------------
+    | Middleware
+    |--------------------------------------------------------------------------
+    |
+    | This is value of middleware class to be pre-load. Pass array for multiple
+    | middleware.
+    |
+    */
+
+    'middleware' => ''
+];
