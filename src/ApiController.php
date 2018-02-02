@@ -371,7 +371,6 @@ class ApiController extends Controller
 
     protected function validateRequest($validation, $data)
     {
-        
         if ($validation) 
         {
             $validator = validator($data, (new $validation)->rules());

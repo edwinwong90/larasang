@@ -54,8 +54,7 @@ class MakeModule extends Command
         $this->createController();
         
         // create model
-        $namespace = '\\App\\Models\\'.ucfirst($this->getNameInput());
-        $this->call('make:model', ['name' => $namespace, '-m' => true]);
+        $this->call('make:model', ['name' => $this->getModelName(), '-m' => true]);
 
         // create config
         $this->call('larasang:make-config', ['name' => $this->getNameInput()]);
@@ -208,7 +207,7 @@ class MakeModule extends Command
      */
     protected function getDefaultNamespace($rootNamespace)
     {
-        return $rootNamespace . '\Http\Controllers\Api';
+        return $rootNamespace . '\Http\Controllers';
     }
     /**
      * Replace the class name for the given stub.
@@ -221,5 +220,16 @@ class MakeModule extends Command
     {
         $class = str_replace($this->getNamespace($name).'\\', '', $name);
         return str_replace('DummyClass', $class, $stub);
+    }
+    /**
+     * get a model name with specific namespace
+     *
+     * @return string
+     */
+    protected function getModelName()
+    {
+        $nameArr = explode('\\',$this->getNameInput());
+        $name = strtolower(end($nameArr));
+        return '\\App\\Models\\'.ucfirst($name);
     }
 }

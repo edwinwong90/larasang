@@ -30,7 +30,7 @@ class EventServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->files = new Filesystem;
-        $modules = config('larasangapi');
+        $modules = config('larasangapi', []);
 
         foreach ($modules as $module)
         {

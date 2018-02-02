@@ -17,7 +17,6 @@ class LarasangServiceProvider extends ServiceProvider
     {
         $this->publishes([
             __DIR__.'/config/larasang.php' => config_path('larasang.php'),
-            __DIR__.'/config/larasangapi' => config_path('larasangapi'),
         ], 'config');
 
         if ($this->app->runningInConsole()) {

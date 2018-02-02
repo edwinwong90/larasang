@@ -65,7 +65,21 @@ class MakeConfig extends Command
     {
         $nameArr = explode('\\',$name);
         $name = strtolower(end($nameArr));
-        return $this->laravel['path.base'].'/config/larasangapi/'.$name.'.php';
+        return $this->getLarasangApiPath().'/'.$name.'.php';
+    }
+
+    /**
+     * get the larasangapi folder path
+     *
+     * @return string
+     */
+    protected function getLarasangApiPath()
+    {
+        $path = $this->laravel['path.base'].'/config/larasangapi';
+        if (! $this->files->isDirectory($path)) {
+            $this->files->makeDirectory($path, 0777, true, true);
+        }
+        return $path;
     }
 
     protected function buildConfig($name)
@@ -125,7 +139,7 @@ class MakeConfig extends Command
      */
     protected function getControllerClass($name)
     {
-        return trim(str_replace('{CONTROLLER}', ucfirst($name), '\App\Http\Controllers\Api\{CONTROLLER}::class'));
+        return trim(str_replace('{CONTROLLER}', ucfirst($name), '\App\Http\Controllers\{CONTROLLER}::class'));
     }
 
     /**
