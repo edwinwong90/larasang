@@ -1,6 +1,6 @@
 <?php
 
-namespace Edwinwong90\Larasang;
+namespace Larasang;
 
 use Illuminate\Support\Facades\Route;
 

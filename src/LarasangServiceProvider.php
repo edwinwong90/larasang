@@ -1,6 +1,6 @@
 <?php
 
-namespace Edwinwong90\Larasang;
+namespace Larasang;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Route;
@@ -22,8 +22,8 @@ class LarasangServiceProvider extends ServiceProvider
 
         if ($this->app->runningInConsole()) {
             $this->commands([
-                \Edwinwong90\Larasang\Commands\MakeModule::class,
-                \Edwinwong90\Larasang\Commands\MakeConfig::class,
+                \Larasang\Commands\MakeModule::class,
+                \Larasang\Commands\MakeConfig::class,
             ]);
         }
 

@@ -1,20 +1,20 @@
 <?php
 
-namespace Edwinwong90\Larasang;
+namespace Larasang;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Edwinwong90\Larasang\Events\IndexBefore;
-use Edwinwong90\Larasang\Events\IndexAfter;
-use Edwinwong90\Larasang\Events\StoreBefore;
-use Edwinwong90\Larasang\Events\StoreAfter;
-use Edwinwong90\Larasang\Events\UpdateBefore;
-use Edwinwong90\Larasang\Events\UpdateAfter;
-use Edwinwong90\Larasang\Events\ShowBefore;
-use Edwinwong90\Larasang\Events\ShowAfter;
-use Edwinwong90\Larasang\Events\DeleteBefore;
-use Edwinwong90\Larasang\Events\DeleteAfter;
-use Edwinwong90\Larasang\Resources\DefaultResource;
+use Larasang\Events\IndexBefore;
+use Larasang\Events\IndexAfter;
+use Larasang\Events\StoreBefore;
+use Larasang\Events\StoreAfter;
+use Larasang\Events\UpdateBefore;
+use Larasang\Events\UpdateAfter;
+use Larasang\Events\ShowBefore;
+use Larasang\Events\ShowAfter;
+use Larasang\Events\DeleteBefore;
+use Larasang\Events\DeleteAfter;
+use Larasang\Resources\DefaultResource;
 
 class ApiController extends Controller
 {

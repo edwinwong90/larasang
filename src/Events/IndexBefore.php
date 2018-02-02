@@ -1,6 +1,6 @@
 <?php
 
-namespace Edwinwong90\Larasang\Events;
+namespace Larasang\Events;
 
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Queue\SerializesModels;

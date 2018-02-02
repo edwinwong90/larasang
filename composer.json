@@ -11,5 +11,17 @@
     ],
     "require": {
         "php": ">=7.0.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Larasang\\": "src"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Larasang\\LarasangServiceProvider"
+            ]
+        }
     }
 }
