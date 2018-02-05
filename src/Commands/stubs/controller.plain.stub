@@ -3,7 +3,7 @@
 namespace DummyNamespace;
 
 use Illuminate\Http\Request;
-use Edwinwong90\Larasang\ApiController;
+use Larasang\ApiController;
 
 class DummyClass extends ApiController
 {
