@@ -45,10 +45,9 @@ class RouteRegistrar
 
     public function forModuleRoutes()
     {
-        $options = [];
-
         foreach($this->config as $module => $config)
         {
+            $options = [];
             $this->setModule($module);
 
             if ($this->getModuleConfig('prefix')) 

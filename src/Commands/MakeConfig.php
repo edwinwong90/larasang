@@ -51,6 +51,12 @@ class MakeConfig extends Command
     public function handle()
     {   
         $path = $this->getConfigPath($this->getNameInput());
+
+        if ($this->alreadyExists($this->getNameInput())) {
+            $this->error($this->type.' already exists!');
+            return false;
+        }
+
         $this->files->put($path, $this->buildConfig($this->getNameInput()));
         $this->info('Module config created successfully.');
     }
@@ -150,5 +156,16 @@ class MakeConfig extends Command
     protected function getModelClass($name)
     {
         return trim(str_replace('{MODEL}', ucfirst($name), '\App\Models\{MODEL}::class'));
+    }
+
+    /**
+     * Determine if the class already exists.
+     *
+     * @param  string  $filename
+     * @return bool
+     */
+    protected function alreadyExists($filename)
+    {
+        return $this->files->exists($this->getConfigPath($filename));
     }
 }

@@ -322,8 +322,7 @@ class ApiController extends Controller
             }
 
             $this->model      = new $config['model']();
-            $this->resource   = isset($config['resource']) ? $config['resource'] : DefaultResource::class;
-
+            $this->resource   = isset($config['resource']) && !empty($config['resource']) ? $config['resource'] : DefaultResource::class;
         }
         catch (\Exception $e)
         {

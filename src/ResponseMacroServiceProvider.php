@@ -32,7 +32,7 @@ class ResponseMacroServiceProvider extends ServiceProvider
             return response()->json($response, 404);
         });
 
-        Response::macro('errorBadRequest', function ($value) {
+        Response::macro('errorBadRequest', function ($value = []) {
             if(is_array($value))
                 $response = array_merge(['success'=>0, 'message'=>'Bad Request'], $value);
             else

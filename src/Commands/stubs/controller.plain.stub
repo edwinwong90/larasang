@@ -7,5 +7,97 @@ use Larasang\ApiController;
 
 class DummyClass extends ApiController
 {
-    //
+    /**
+     * List multiple resource
+     * 
+     * @return json
+     */
+    public function index()
+    {
+        return parent::index();
+    }
+
+    /**
+     * Show a single resource
+     * 
+     * @param Integer $id  Resource ID
+     * 
+     * @return json
+     */
+    public function show($id)
+    {
+        return parent::show($id);
+    }
+
+    /**
+     * Store a single resource
+     * 
+     * @param \Illuminate\Http\Request $request
+     * 
+     * @return json
+     */
+    public function store(Request $request)
+    {
+        return parent::store($request);
+    }
+
+    /**
+     * Store multiple resource
+     *
+     * @param Request $request
+     * @return json
+     */
+    public function storeMany(Request $request)
+    {
+        return parent::storeMany($request);
+    }
+
+    /**
+     * Update a single resource
+     * 
+     * @param \Illuminate\Http\Request $request
+     * @param Integer $id model primary key ID
+     * 
+     * @return json
+     */
+    public function update(Request $request, $id)
+    {
+        return parent::update($request, $id);
+    }
+
+    /**
+     * Update multiple resource
+     * 
+     * @param \Illuminate\Http\Request $request
+     * @param Integer $id model primary key ID
+     * 
+     * @return json
+     */
+    public function updateMany(Request $request)
+    {
+        return parent::updateMany($request);
+    }
+
+    /**
+     * Delete a single resource
+     * @param Integer $id model primary key ID
+     * 
+     * @return json
+     */
+    public function destroy($id)
+    {
+        return parent::destroy($id);
+    }
+
+    /**
+     * Delete multiple resource
+     * 
+     * @param \Illuminate\Http\Request $request
+     * 
+     * @return json
+     */
+    public function destroyMany(Request $request)
+    {
+        return parent::destroyMany($request);
+    }
 }
