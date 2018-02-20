@@ -15,7 +15,10 @@
     "autoload": {
         "psr-4": {
             "Larasang\\": "src"
-        }
+        },
+        "files": [
+            "src/Helper.php"
+        ]
     },
     "extra": {
         "laravel": {
