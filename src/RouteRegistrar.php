@@ -101,8 +101,8 @@ class RouteRegistrar
     public function addResourceRoutes() 
     {
         $config = $this->getModuleConfig();
-        $controller = '\\'.$config['controller'];
-        $resource_config = isset($config['route_resource']) ? $config['route_resource'] : [];
+        $controller = '\\'.$this->getModuleConfig('controller');
+        $resource_config = $this->getModuleConfig('route_resource_config') ? $this->getModuleConfig('route_resource_config') : [];
         $module_many_path = $this->module.'/many';
 
         if (empty($resource_config)) 
@@ -143,10 +143,7 @@ class RouteRegistrar
      */
     protected function getModuleConfig($name = null)
     {   
-        if (!$this->module) 
-        {
-            abort('Route module is not set');
-        }
+        $this->validateConfig();
 
         if ($name)
         {
@@ -154,5 +151,23 @@ class RouteRegistrar
         }
             
         return config('larasangapi.'.$this->module);
+    }
+
+    protected function validateConfig()
+    {
+        if (!$this->module) 
+        {
+            abort('Route module is not set');
+        }
+
+        if (!config('larasangapi.'.$this->module.'.controller'))
+        {
+            abort('Route module controller is not set');
+        }
+
+        if (!config('larasangapi.'.$this->module.'.model'))
+        {
+            abort('Route module model is not set');
+        }
     }
 }

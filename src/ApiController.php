@@ -295,7 +295,7 @@ class ApiController extends Controller
      * 
      * @return json
      */
-    private function resourceResponse($model, $collection = false)
+    protected function resourceResponse($model, $collection = false)
     { 
         if ($collection)
         {
