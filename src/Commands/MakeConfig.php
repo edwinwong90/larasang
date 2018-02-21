@@ -155,6 +155,8 @@ class MakeConfig extends Command
      */
     protected function getModelClass($name)
     {
+        $nameArr = explode('\\',$this->getNameInput());
+        $name = strtolower(end($nameArr));
         return trim(str_replace('{MODEL}', ucfirst($name), '\App\Models\{MODEL}::class'));
     }
 
