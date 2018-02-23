@@ -48,7 +48,7 @@ class ApiController extends Controller
      * 
      * @return json
      */
-    public function index()
+    protected function index()
     {
         $this->fireEvent(new IndexBefore());
 
@@ -69,7 +69,7 @@ class ApiController extends Controller
      * 
      * @return json
      */
-    public function show($id)
+    protected function show($id)
     {
         $object = $this->model->find($id);
         
@@ -90,7 +90,7 @@ class ApiController extends Controller
      * 
      * @return json
      */
-    public function store(Request $request)
+    protected function store(Request $request)
     {
         $data = $request -> all();
         if(!count($data))
@@ -117,7 +117,7 @@ class ApiController extends Controller
      * @param Request $request
      * @return json
      */
-    public function storeMany(Request $request)
+    protected function storeMany(Request $request)
     {
         $rows = collect($request -> all());
 
@@ -144,7 +144,7 @@ class ApiController extends Controller
      * 
      * @return json
      */
-    public function update(Request $request, $id)
+    protected function update(Request $request, $id)
     {
         $data = $request -> all();
         
@@ -173,7 +173,7 @@ class ApiController extends Controller
      * 
      * @return json
      */
-    public function updateMany(Request $request)
+    protected function updateMany(Request $request)
     {
         $rows = collect($request -> all());
 
@@ -221,7 +221,7 @@ class ApiController extends Controller
      * 
      * @return json
      */
-    public function destroy($id)
+    protected function destroy($id)
     {
         $this->fireEvent(new DeleteBefore());
 
@@ -244,7 +244,7 @@ class ApiController extends Controller
      * 
      * @return json
      */
-    public function destroyMany(Request $request)
+    protected function destroyMany(Request $request)
     {
         if(!$request->has('ids'))
             return response()->errorBadRequest();
