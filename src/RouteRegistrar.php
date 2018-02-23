@@ -26,6 +26,16 @@ class RouteRegistrar
      * @var string
      */
     protected $module;
+
+    const RESOURCE_INDEX = 'index';
+    const RESOURCE_SHOW = 'show';
+    const RESOURCE_STORE = 'store';
+    const RESOURCE_STORE_MANY = 'storeMany';
+    const RESOURCE_UPDATE = 'update';
+    const RESOURCE_UPDATE_MANY = 'updateMany';
+    const RESOURCE_DESTROY = 'destroy';
+    const RESOURCE_DESTROY_MANY = 'destroyMany';
+
     /**
      * Create a new route registrar instance.
      *
@@ -100,41 +110,82 @@ class RouteRegistrar
      */
     public function addResourceRoutes() 
     {
-        $config = $this->getModuleConfig();
         $controller = '\\'.$this->getModuleConfig('controller');
-        $resource_config = $this->getModuleConfig('route_resource_config') ? $this->getModuleConfig('route_resource_config') : [];
-        $module_many_path = $this->module.'/many';
 
-        if (empty($resource_config)) 
+        $methods = [
+            self::RESOURCE_INDEX,
+            self::RESOURCE_SHOW,
+            self::RESOURCE_STORE,
+            self::RESOURCE_STORE_MANY,
+            self::RESOURCE_UPDATE,
+            self::RESOURCE_UPDATE_MANY,
+            self::RESOURCE_DESTROY,
+            self::RESOURCE_DESTROY_MANY,
+        ];
+
+        foreach ($methods as $method) 
         {
-            $this->router->post($module_many_path, $controller.'@storeMany')->name($this->module.'.store.many');
-            $this->router->match(['put', 'patch'], $module_many_path, $controller.'@updateMany')->name($this->module.'.update.many');
-            $this->router->delete($module_many_path, $controller.'@destroyMany')->name($this->module.'.destroy.many');
-        }
-        else 
-        {
-            if (isset($resource_config['only'])) 
+            $action = $controller.'@'.$method;
+            $controller_class = new $controller;
+
+            // check method exist only create route.
+            if (method_exists($controller_class, $method))
             {
-                if (in_array('storeMany', $resource_config['only'])) 
-                {
-                    $this->router->post($module_many_path, $controller.'@storeMany')->name($this->module.'.store.many');
-                }
-
-                if (in_array('updateMany', $resource_config['only'])) 
-                {
-                    $this->router->match(['put', 'patch'], $module_many_path, $controller.'@updateMany')->name($this->module.'.update.many');
-                }
-
-                if (in_array('destroyMany', $resource_config['only'])) 
-                {
-                    $this->router->delete($module_many_path, $controller.'@destroyMany')->name($this->module.'.destroy.many');
-                }             
-            }     
-        }  
-
-        $this->router->apiResource($this->module, $controller, $resource_config);
+                // check the controller has method defined or not
+                if (in_array($method, get_class_methods($controller_class)))
+                    $this->addRoute($method, $action);
+            }
+        }
     }
 
+    /**
+     * add single Route
+     *
+     * @param [string] $method  e.g INDEX, STORE, SHOW and more.
+     * @param [string] $action e.g "TestController@index"
+     * @return void
+     */
+    protected function addRoute($method, $action)
+    {
+        $controller = '\\'.$this->getModuleConfig('controller');
+        $route_name = $this->module.'.'.$method;
+        
+        switch ($method) 
+        {
+            case self::RESOURCE_INDEX:
+                $path = $this->module;
+                $this->router->get($path, $action)->name($route_name);
+            break;
+
+            case self::RESOURCE_SHOW:
+                $path = $this->module.'/{id}';
+                $this->router->get($path, $action)->name($route_name);
+            break;
+
+            case self::RESOURCE_STORE:
+            case self::RESOURCE_STORE_MANY:
+                $path = $this->module;
+                $path = ($method == 'storeMany') ? $path.'/many' : $path;
+                $this->router->post($path, $action)->name($route_name);
+            break;
+
+            case self::RESOURCE_UPDATE:
+            case self::RESOURCE_UPDATE_MANY:
+                $path = $this->module.'/{id}';
+                $path = ($method == self::RESOURCE_UPDATE_MANY) ? $path.'/many' : $path;
+                $this->router->put($path, $action)->name($route_name.'.put');
+                $this->router->post($path, $action)->name($route_name.'.post');
+            break;
+
+            case self::RESOURCE_DESTROY:
+            case self::RESOURCE_DESTROY_MANY:
+                $path = $this->module.'/{id}';
+                $path = ($method == self::RESOURCE_DESTROY_MANY) ? $path.'/many' : $path;
+                $this->router->delete($path, $action)->name($route_name);
+            break;
+        }
+    }
+    
     /**
      * get module config
      *

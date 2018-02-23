@@ -54,18 +54,6 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Route Configuration
-    |--------------------------------------------------------------------------
-    |
-    | This value is the Laravel resource route configuration. Read more, 
-    | https://laravel.com/docs/5.5/controllers#restful-partial-resource-routes
-    |
-    */
-    
-    'route_resource_config' => [],
-
-    /*
-    |--------------------------------------------------------------------------
     | Request Validation
     |--------------------------------------------------------------------------
     |
