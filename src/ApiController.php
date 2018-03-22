@@ -299,6 +299,8 @@ class ApiController extends Controller
     { 
         if ($collection)
         {
+            abort_if (!$model instanceof \Illuminate\Support\Collection, 400,'$model must be collection');
+            
             return $this->resource::collection($model)->additional(['success'=>1]);
         }
 
@@ -315,19 +317,13 @@ class ApiController extends Controller
         $this->setConfig();
         $config = $this->getConfig();
     
-        try {
-            if (!isset($config['model']))
-            {
-                throw new \Exception('Model not found in config');
-            }
-
-            $this->model      = new $config['model']();
-            $this->resource   = isset($config['resource']) && !empty($config['resource']) ? $config['resource'] : DefaultResource::class;
+        abort_if (!isset($config['model']), 400, 'Model not found in config');
+        
+        $this->model      = new $config['model']();
+        
+        if (isset($config['resource'])) {
+            $this->setResource($config['resource']);
         }
-        catch (\Exception $e)
-        {
-            abort(400, $e->getMessage());
-        }  
     }
 
     /**
@@ -380,5 +376,10 @@ class ApiController extends Controller
             }
         }
         return TRUE;
+    }
+
+    protected function setResource($resource)
+    {
+        $this->resource   = $resource && !empty($resource) ? $resource : DefaultResource::class;
     }
 }

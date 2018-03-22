@@ -229,7 +229,7 @@ class MakeModule extends Command
     protected function getModelName()
     {
         $nameArr = explode('\\',$this->getNameInput());
-        $name = strtolower(end($nameArr));
+        $name = end($nameArr);
         return '\\App\\Models\\'.ucfirst($name);
     }
 }
