@@ -299,8 +299,6 @@ class ApiController extends Controller
     { 
         if ($collection)
         {
-            abort_if (!$model instanceof \Illuminate\Support\Collection, 400,'$model must be collection');
-            
             return $this->resource::collection($model)->additional(['success'=>1]);
         }
 
