@@ -42,9 +42,9 @@ class ResponseMacroServiceProvider extends ServiceProvider
 
         Response::macro('errorValidation', function ($value) {
             if(is_array($value))
-                $response = array_merge(['success'=>0, 'error'=>'Validation Failed'], $value);
+                $response = array_merge(['success'=>0, 'errors'=>'Validation Failed'], $value);
             else
-                $response = ['success'=>0, 'error'=>$value];
+                $response = ['success'=>0, 'errors'=>$value];
             return response()->json($response, 422);
         });
     }
